@@ -1,0 +1,2591 @@
+---
+openapi: 3.0.2
+info:
+  title: Drishti API
+  version: 0.1.0
+paths:
+  "/api/v2/customers/{customer_id}/actions":
+    get:
+      tags:
+      - actions
+      - __external__
+      summary: Search Actions
+      operationId: search_actions_api_v2_customers__customer_id__actions_get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: false
+        schema:
+          title: Name
+          type: string
+        name: name
+        in: query
+      - required: false
+        schema:
+          title: Data Set Ids
+          type: array
+          items:
+            anyOf:
+            - type: string
+              format: uuid
+            - type: string
+        name: data_set_ids
+        in: query
+      - required: false
+        schema:
+          title: Cycle Id
+          type: string
+          format: uuid
+        name: cycle_id
+        in: query
+      - required: false
+        schema:
+          title: Stream Names
+          type: array
+          items:
+            type: string
+        name: stream_names
+        in: query
+      - required: false
+        schema:
+          title: Line Names
+          type: array
+          items:
+            type: string
+        name: line_names
+        in: query
+      - required: false
+        schema:
+          title: Station Names
+          type: array
+          items:
+            type: string
+        name: station_names
+        in: query
+      - required: false
+        schema:
+          title: Product Names
+          type: array
+          items:
+            type: string
+        name: product_names
+        in: query
+      - required: false
+        schema:
+          title: Source Id
+          type: string
+        name: source_id
+        in: query
+      - required: false
+        schema:
+          title: Duration Lb
+          type: number
+        name: duration_lb
+        in: query
+      - required: false
+        schema:
+          title: Duration Ub
+          type: number
+        name: duration_ub
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date
+          type: string
+        name: assembly_date
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Lb
+          type: string
+        name: assembly_date_lb
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Ub
+          type: string
+        name: assembly_date_ub
+        in: query
+      - required: false
+        schema:
+          title: Shift Idx
+          type: integer
+        name: shift_idx
+        in: query
+      - required: false
+        schema:
+          title: Rotation Idx
+          type: integer
+        name: rotation_idx
+        in: query
+      - required: false
+        schema:
+          title: Is Gap
+          type: boolean
+        name: is_gap
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Lb
+          type: string
+          format: date-time
+        name: start_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Ub
+          type: string
+          format: date-time
+        name: start_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Lb
+          type: string
+          format: date-time
+        name: end_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Ub
+          type: string
+          format: date-time
+        name: end_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Lb
+          type: string
+          format: time
+        name: start_time_utc_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Ub
+          type: string
+          format: time
+        name: start_time_utc_ub
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortBy"
+        name: sort_by
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortOrders"
+        name: sort_order
+        in: query
+      - required: false
+        schema:
+          title: Skip
+          type: integer
+          default: 0
+        name: skip
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          type: integer
+          default: 20
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ActionsResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v2/customers/{customer_id}/actions/{action_id}":
+    get:
+      tags:
+      - actions
+      - __external__
+      summary: Get Action
+      operationId: get_action_api_v2_customers__customer_id__actions__action_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Action Id
+          type: string
+          format: uuid
+        name: action_id
+        in: path
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ActionResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v2/customers/{customer_id}/cycles":
+    get:
+      tags:
+      - cycles
+      - __external__
+      summary: Search Cycles
+      operationId: search_cycles_api_v2_customers__customer_id__cycles_get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: false
+        schema:
+          title: Line Data Config Ids
+          type: array
+          items:
+            type: string
+        name: line_data_config_ids
+        in: query
+      - required: false
+        schema:
+          title: Station Data Config Ids
+          type: array
+          items:
+            type: string
+        name: station_data_config_ids
+        in: query
+      - required: false
+        schema:
+          title: Data Set Namespaces
+          type: array
+          items:
+            "$ref": "#/components/schemas/DataSetNamespace"
+        name: data_set_namespaces
+        in: query
+      - required: false
+        schema:
+          title: Data Set Ids
+          type: array
+          items:
+            anyOf:
+            - type: string
+              format: uuid
+            - type: string
+        name: data_set_ids
+        in: query
+      - required: false
+        schema:
+          title: Stream Names
+          type: array
+          items:
+            type: string
+        name: stream_names
+        in: query
+      - required: false
+        schema:
+          title: Station Names
+          type: array
+          items:
+            type: string
+        name: station_names
+        in: query
+      - required: false
+        schema:
+          title: Line Names
+          type: array
+          items:
+            type: string
+        name: line_names
+        in: query
+      - required: false
+        schema:
+          title: Product Names
+          type: array
+          items:
+            type: string
+        name: product_names
+        in: query
+      - required: false
+        schema:
+          title: Tag Names
+          type: array
+          items:
+            type: string
+        name: tag_names
+        in: query
+      - required: false
+        schema:
+          title: Tag Category Names
+          type: array
+          items:
+            type: string
+        name: tag_category_names
+        in: query
+      - required: false
+        schema:
+          title: Source Id
+          type: string
+        name: source_id
+        in: query
+      - required: false
+        schema:
+          title: Source Type
+          type: string
+        name: source_type
+        in: query
+      - required: false
+        schema:
+          title: Duration Lb
+          type: number
+        name: duration_lb
+        in: query
+      - required: false
+        schema:
+          title: Duration Ub
+          type: number
+        name: duration_ub
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date
+          type: string
+        name: assembly_date
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Lb
+          type: string
+        name: assembly_date_lb
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Ub
+          type: string
+        name: assembly_date_ub
+        in: query
+      - required: false
+        schema:
+          title: Shift Idx
+          type: integer
+        name: shift_idx
+        in: query
+      - required: false
+        schema:
+          title: Rotation Idx
+          type: integer
+        name: rotation_idx
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Lb
+          type: string
+          format: date-time
+        name: start_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Ub
+          type: string
+          format: date-time
+        name: start_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Lb
+          type: string
+          format: date-time
+        name: end_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Ub
+          type: string
+          format: date-time
+        name: end_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Lb
+          type: string
+          format: time
+        name: start_time_utc_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Ub
+          type: string
+          format: time
+        name: start_time_utc_ub
+        in: query
+      - required: false
+        schema:
+          title: Work Time Lb
+          type: number
+        name: work_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Work Time Ub
+          type: number
+        name: work_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Idle Time Lb
+          type: number
+        name: idle_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Idle Time Ub
+          type: number
+        name: idle_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Unit In To Unit In Time Lb
+          type: number
+        name: unit_in_to_unit_in_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Unit In To Unit In Time Ub
+          type: number
+        name: unit_in_to_unit_in_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Total Time Lb
+          type: number
+        name: total_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Total Time Ub
+          type: number
+        name: total_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Unit In View Time Lb
+          type: number
+        name: unit_in_view_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Unit In View Time Ub
+          type: number
+        name: unit_in_view_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Unit Out Of View Time Lb
+          type: number
+        name: unit_out_of_view_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Unit Out Of View Time Ub
+          type: number
+        name: unit_out_of_view_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Takt Time Filtering
+          type: boolean
+          default: true
+        name: takt_time_filtering
+        in: query
+      - required: false
+        schema:
+          title: Jarvis Filtering
+          type: boolean
+          default: true
+        name: jarvis_filtering
+        in: query
+      - required: false
+        schema:
+          title: Validation Statuses
+          type: array
+          items:
+            type: integer
+        name: validation_statuses
+        in: query
+      - required: false
+        schema:
+          title: Delete Actions
+          type: boolean
+          default: false
+        name: delete_actions
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortBy"
+        name: sort_by
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortOrders"
+        name: sort_order
+        in: query
+      - required: false
+        schema:
+          title: Skip
+          type: integer
+          default: 0
+        name: skip
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          type: integer
+          default: 20
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CyclesResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v2/customers/{customer_id}/cycles/{cycle_id}":
+    get:
+      tags:
+      - cycles
+      - __external__
+      summary: Get Cycle
+      operationId: get_cycle_api_v2_customers__customer_id__cycles__cycle_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Cycle Id
+          type: string
+          format: uuid
+        name: cycle_id
+        in: path
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CycleResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v2/customers/{customer_id}/observations/{observation_id}":
+    get:
+      tags:
+      - observations
+      - __external__
+      summary: Get Observation
+      operationId: get_observation_api_v2_customers__customer_id__observations__observation_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Observation Id
+          type: string
+          format: uuid
+        name: observation_id
+        in: path
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ObservationResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/api/v2/customers/{customer_id}/observations":
+    get:
+      tags:
+      - observations
+      - __external__
+      summary: Search Observations
+      operationId: search_observations_api_v2_customers__customer_id__observations_get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: false
+        schema:
+          title: Stream Names
+          type: array
+          items:
+            type: string
+        name: stream_names
+        in: query
+      - required: false
+        schema:
+          title: Line Names
+          type: array
+          items:
+            type: string
+        name: line_names
+        in: query
+      - required: false
+        schema:
+          title: Station Names
+          type: array
+          items:
+            type: string
+        name: station_names
+        in: query
+      - required: false
+        schema:
+          title: Product Names
+          type: array
+          items:
+            type: string
+        name: product_names
+        in: query
+      - required: false
+        schema:
+          title: Tag Names
+          type: array
+          items:
+            type: string
+        name: tag_names
+        in: query
+      - required: false
+        schema:
+          title: Tag Category Names
+          type: array
+          items:
+            type: string
+        name: tag_category_names
+        in: query
+      - required: false
+        schema:
+          title: Source Id
+          type: string
+        name: source_id
+        in: query
+      - required: false
+        schema:
+          title: Customer Source Ids
+          type: array
+          items:
+            type: string
+        name: customer_source_ids
+        in: query
+      - required: false
+        schema:
+          title: Source Type
+          type: string
+        name: source_type
+        in: query
+      - required: false
+        schema:
+          title: Source Types
+          type: array
+          items:
+            type: string
+        name: source_types
+        in: query
+      - required: false
+        schema:
+          title: Duration Lb
+          type: number
+        name: duration_lb
+        in: query
+      - required: false
+        schema:
+          title: Duration Ub
+          type: number
+        name: duration_ub
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date
+          type: string
+        name: assembly_date
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Lb
+          type: string
+        name: assembly_date_lb
+        in: query
+      - required: false
+        schema:
+          title: Assembly Date Ub
+          type: string
+        name: assembly_date_ub
+        in: query
+      - required: false
+        schema:
+          title: Shift Idx
+          type: integer
+        name: shift_idx
+        in: query
+      - required: false
+        schema:
+          title: Rotation Idx
+          type: integer
+        name: rotation_idx
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Lb
+          type: string
+          format: date-time
+        name: start_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Date Time Ub
+          type: string
+          format: date-time
+        name: start_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Lb
+          type: string
+          format: date-time
+        name: end_date_time_lb
+        in: query
+      - required: false
+        schema:
+          title: End Date Time Ub
+          type: string
+          format: date-time
+        name: end_date_time_ub
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Lb
+          type: string
+          format: time
+        name: start_time_utc_lb
+        in: query
+      - required: false
+        schema:
+          title: Start Time Utc Ub
+          type: string
+          format: time
+        name: start_time_utc_ub
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortBy"
+        name: sort_by
+        in: query
+      - required: false
+        schema:
+          "$ref": "#/components/schemas/SortOrders"
+        name: sort_order
+        in: query
+      - required: false
+        schema:
+          title: Skip
+          type: integer
+          default: 0
+        name: skip
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          type: integer
+          default: 20
+        name: limit
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ObservationsResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/config/v1/customers/{customer_id}/streams/{stream_id}":
+    get:
+      tags:
+      - __external__
+      - streams
+      summary: Get Stream
+      description: Get Stream by id.
+      operationId: get_stream_config_v1_customers__customer_id__streams__stream_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: true
+        schema:
+          title: Stream Id
+          type: string
+        name: stream_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/StreamResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/config/v1/customers/{customer_id}/streams":
+    get:
+      tags:
+      - __external__
+      - streams
+      summary: Get Streams
+      description: Get Stream by id.
+      operationId: get_streams_config_v1_customers__customer_id__streams_get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: false
+        schema:
+          title: Skip
+          type: integer
+          default: 0
+        name: skip
+        in: query
+      - required: false
+        schema:
+          title: Limit
+          type: integer
+          default: 100
+        name: limit
+        in: query
+      - required: false
+        schema:
+          title: Station Ids
+          type: array
+          items:
+            type: string
+          default: []
+        name: station_ids
+        in: query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Streams Config V1 Customers  Customer Id  Streams
+                  Get
+                type: array
+                items:
+                  "$ref": "#/components/schemas/StreamResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/config/v1/customers/{customer_id}/lines/sample/{line_id}":
+    get:
+      tags:
+      - __external__
+      - line
+      summary: Get Sample Line
+      description: |-
+        Copy of get_line function. Written separately to show working example of an updated
+        response class separately.
+        TODO: to remove this.
+      operationId: get_sample_line_config_v1_customers__customer_id__lines_sample__line_id__get
+      parameters:
+      - required: true
+        schema:
+          title: Customer Id
+          type: string
+        name: customer_id
+        in: path
+      - required: true
+        schema:
+          title: Line Id
+          type: string
+        name: line_id
+        in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DummyLineResponse"
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/HTTPValidationError"
+components:
+  schemas:
+    Action:
+      title: Action
+      required:
+      - action_name
+      - action_count
+      type: object
+      properties:
+        action_id:
+          title: Action Id
+          type: string
+        action_name:
+          title: Action Name
+          type: string
+        action_count:
+          title: Action Count
+          type: integer
+    ActionCountCheckDetails:
+      title: ActionCountCheckDetails
+      required:
+      - action_name
+      - expected_count
+      - detected_count
+      type: object
+      properties:
+        action_name:
+          title: Action Name
+          type: string
+        expected_count:
+          title: Expected Count
+          type: integer
+        detected_count:
+          title: Detected Count
+          type: integer
+    ActionListHistoryDict:
+      title: ActionListHistoryDict
+      required:
+      - action_list
+      type: object
+      properties:
+        action_list:
+          title: Action List
+          type: array
+          items:
+            "$ref": "#/components/schemas/Action"
+    ActionListHistoryDto:
+      title: ActionListHistoryDto
+      required:
+      - id
+      - application_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        application_time:
+          title: Application Time
+          type: string
+          format: date-time
+        data:
+          "$ref": "#/components/schemas/ActionListHistoryDict"
+    ActionResponse:
+      title: ActionResponse
+      required:
+      - name
+      - stream_name
+      - start_date_time
+      - end_date_time
+      - source
+      - duration
+      - stream_id
+      - label
+      - action_uuid
+      type: object
+      properties:
+        _id:
+          title: " Id"
+          type: string
+          format: uuid
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated At
+          type: string
+          format: date-time
+        created_by:
+          title: Created By
+          type: string
+        name:
+          title: Name
+          type: string
+        label_id:
+          title: Label Id
+          type: string
+        stream_name:
+          title: Stream Name
+          type: string
+        start_date_time:
+          title: Start Date Time
+          type: string
+          format: date-time
+        end_date_time:
+          title: End Date Time
+          type: string
+          format: date-time
+        duration:
+          title: Duration
+          type: number
+        customer_name:
+          title: Customer Name
+          type: string
+        line_name:
+          title: Line Name
+          type: string
+        station_name:
+          title: Station Name
+          type: string
+        product_name:
+          title: Product Name
+          type: string
+        assembly_date:
+          title: Assembly Date
+          type: string
+        shift_idx:
+          title: Shift Idx
+          type: integer
+        rotation_idx:
+          title: Rotation Idx
+          type: integer
+        is_gap:
+          title: Is Gap
+          type: boolean
+        spans_break:
+          title: Spans Break
+          type: boolean
+        percentile:
+          title: Percentile
+          type: number
+        station_data_config_id:
+          title: Station Data Config Id
+          type: string
+        cycle_id:
+          title: Cycle Id
+          type: string
+          format: uuid
+        thumbnail_fname:
+          title: Thumbnail Fname
+          type: string
+        thumbnail_url:
+          title: Thumbnail Url
+          type: string
+        distance_from_median:
+          title: Distance From Median
+          type: number
+        level:
+          title: Level
+          type: integer
+        stream_id:
+          title: Stream Id
+          type: string
+        line_id:
+          title: Line Id
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        label:
+          title: Label
+          type: string
+        cycle_uuid:
+          title: Cycle Uuid
+          type: string
+          format: uuid
+        action_uuid:
+          title: Action Uuid
+          type: string
+          format: uuid
+      description: Adds common utilities required for schema response classes.
+    ActionSequenceCheckDetails:
+      title: ActionSequenceCheckDetails
+      required:
+      - expected_actions
+      - detected_actions
+      type: object
+      properties:
+        expected_actions:
+          title: Expected Actions
+          type: array
+          items:
+            type: string
+        detected_actions:
+          title: Detected Actions
+          type: array
+          items:
+            type: string
+    ActionsResponse:
+      title: ActionsResponse
+      required:
+      - metadata
+      - results
+      type: object
+      properties:
+        metadata:
+          "$ref": "#/components/schemas/PaginationMeta"
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/ActionResponse"
+      description: Adds common utilities required for schema response classes.
+    CameraBaseResponse:
+      title: CameraBaseResponse
+      required:
+      - id
+      - customer_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        mac:
+          title: Mac
+          type: string
+        ip:
+          title: Ip
+          type: string
+        stream_id:
+          title: Stream Id
+          type: string
+        fps:
+          title: Fps
+          exclusiveMinimum: 0
+          type: integer
+        standard:
+          title: Standard
+          type: string
+        frame_height:
+          title: Frame Height
+          exclusiveMinimum: 0
+          type: integer
+        frame_width:
+          title: Frame Width
+          exclusiveMinimum: 0
+          type: integer
+        resolution:
+          title: Resolution
+          type: string
+        camera_template:
+          "$ref": "#/components/schemas/CameraTemplateResponse"
+        camera_template_id:
+          title: Camera Template Id
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+    CameraTemplateResponse:
+      title: CameraTemplateResponse
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        make:
+          title: Make
+          type: string
+        rtsp_port:
+          title: Rtsp Port
+          type: integer
+        http_port:
+          title: Http Port
+          type: integer
+        rtsp_url_suffix:
+          title: Rtsp Url Suffix
+          type: string
+    Check:
+      title: Check
+      required:
+      - name
+      - type
+      - status
+      type: object
+      properties:
+        config_id:
+          title: Config Id
+          type: string
+          format: uuid
+        name:
+          title: Name
+          type: string
+        type:
+          "$ref": "#/components/schemas/CheckType"
+        status:
+          "$ref": "#/components/schemas/Status"
+        action_count_check_details:
+          "$ref": "#/components/schemas/ActionCountCheckDetails"
+        action_sequence_check_details:
+          "$ref": "#/components/schemas/ActionSequenceCheckDetails"
+        dpy_sbs_station2_check_details:
+          "$ref": "#/components/schemas/DPYSbsStation2CheckDetails"
+        dpy_sbs_station2_v2_check_details:
+          "$ref": "#/components/schemas/DPYSbsStation2V2CheckDetails"
+    CheckType:
+      title: CheckType
+      enum:
+      - action_count
+      - action_sequence
+      - dpy_sbs_station2
+      - dpy_sbs_station2_v2
+      type: string
+      description: An enumeration.
+    CustomerInfraDto:
+      title: CustomerInfraDto
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        wowza_url:
+          title: Wowza Url
+          type: string
+        external_rst_host:
+          title: External Rst Host
+          type: string
+        internal_rst_host:
+          title: Internal Rst Host
+          type: string
+        port_block_start:
+          title: Port Block Start
+          type: integer
+        port_block_end:
+          title: Port Block End
+          type: integer
+        deployment_type:
+          "$ref": "#/components/schemas/DeploymentType"
+        customer_id:
+          title: Customer Id
+          type: string
+        wowza_internal_url:
+          title: Wowza Internal Url
+          type: string
+        region:
+          title: Region
+          type: string
+        environment:
+          "$ref": "#/components/schemas/EnvironmentType"
+        storage_duration_days:
+          title: Storage Duration Days
+          type: integer
+        max_bandwidth_mbps:
+          title: Max Bandwidth Mbps
+          type: integer
+      description: |-
+        Properties stored by DB are represented here for data transfer
+        over the wire.
+        1. Some inferred information that is not stored in DB but is logically
+        inferred from given attributes shall come here using @property.
+        These fields are not written to database.
+
+        2. In case, you need to store extra information which can't be done by [1].
+        Define override exclude_extras attributes in the dto class. This will not
+        be persisted to database in create and update.
+
+        3. We can add extra relationship in sqlalchemy models that needs to be part of
+        dto to save code but on updates won't be persisted to database by using extras
+        mentioned in [2].
+    CycleResponse:
+      title: CycleResponse
+      required:
+      - stream_name
+      - start_date_time
+      - end_date_time
+      - source
+      - duration
+      type: object
+      properties:
+        _id:
+          title: " Id"
+          type: string
+          format: uuid
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated At
+          type: string
+          format: date-time
+        created_by:
+          title: Created By
+          type: string
+        stream_name:
+          title: Stream Name
+          type: string
+        start_date_time:
+          title: Start Date Time
+          type: string
+          format: date-time
+        end_date_time:
+          title: End Date Time
+          type: string
+          format: date-time
+        customer_name:
+          title: Customer Name
+          type: string
+        line_name:
+          title: Line Name
+          type: string
+        station_name:
+          title: Station Name
+          type: string
+        product_name:
+          title: Product Name
+          type: string
+        serial_number:
+          title: Serial Number
+          type: string
+        assembly_date:
+          title: Assembly Date
+          type: string
+        shift_idx:
+          title: Shift Idx
+          type: integer
+        rotation_idx:
+          title: Rotation Idx
+          type: integer
+        unit_in_view_time:
+          title: Unit In View Time
+          type: number
+        unit_out_to_unit_in_time:
+          title: Unit Out To Unit In Time
+          type: number
+        unit_in_to_unit_in_time:
+          title: Unit In To Unit In Time
+          type: number
+        unit_out_of_view_time:
+          title: Unit Out Of View Time
+          type: number
+        unit_in_wait_time:
+          title: Unit In Wait Time
+          type: number
+        work_time:
+          title: Work Time
+          type: number
+        unit_out_wait_time:
+          title: Unit Out Wait Time
+          type: number
+        total_wait_time:
+          title: Total Wait Time
+          type: number
+        time_to_next_cycle:
+          title: Time To Next Cycle
+          type: number
+        spans_break:
+          title: Spans Break
+          type: boolean
+        break_prev:
+          title: Break Prev
+          type: boolean
+        break_next:
+          title: Break Next
+          type: boolean
+        percentile:
+          title: Percentile
+          type: number
+        distance_from_median:
+          title: Distance From Median
+          type: number
+        station_data_config_id:
+          title: Station Data Config Id
+          type: string
+        thumbnail_fname:
+          title: Thumbnail Fname
+          type: string
+        thumbnail_url:
+          title: Thumbnail Url
+          type: string
+        dependent_sources:
+          title: Dependent Sources
+          type: array
+          items:
+            "$ref": "#/components/schemas/Source"
+        dependent_cycle_ids:
+          title: Dependent Cycle Ids
+          type: array
+          items:
+            type: string
+            format: uuid
+        has_actions:
+          title: Has Actions
+          type: boolean
+        anomaly_info:
+          title: Anomaly Info
+          type: object
+        stream_id:
+          title: Stream Id
+          type: string
+        line_id:
+          title: Line Id
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        observations:
+          title: Observations
+          type: array
+          items:
+            "$ref": "#/components/schemas/ObservationResponse"
+          default: []
+        validations:
+          title: Validations
+          type: array
+          items:
+            "$ref": "#/components/schemas/Validation"
+          default: []
+      description: Adds common utilities required for schema response classes.
+    CyclesResponse:
+      title: CyclesResponse
+      required:
+      - metadata
+      - results
+      type: object
+      properties:
+        metadata:
+          "$ref": "#/components/schemas/PaginationMeta"
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/CycleResponse"
+      description: Adds common utilities required for schema response classes.
+    DPYSbsStation2CheckDetails:
+      title: DPYSbsStation2CheckDetails
+      type: object
+      properties:
+        led_sequence:
+          title: Led Sequence
+          type: string
+        pick_sequence:
+          title: Pick Sequence
+          type: string
+        place_sequence:
+          title: Place Sequence
+          type: string
+        jig_order:
+          title: Jig Order
+          type: string
+        failure_reason:
+          title: Failure Reason
+          type: string
+    DPYSbsStation2V2CheckDetails:
+      title: DPYSbsStation2V2CheckDetails
+      type: object
+      properties:
+        led_sequence:
+          title: Led Sequence
+          type: string
+        coated_pick_sequence:
+          title: Coated Pick Sequence
+          type: string
+        uncoated_pick_sequence:
+          title: Uncoated Pick Sequence
+          type: string
+        coated_place_sequence:
+          title: Coated Place Sequence
+          type: string
+        uncoated_place_sequence:
+          title: Uncoated Place Sequence
+          type: string
+        jig_order:
+          title: Jig Order
+          type: string
+        failure_reason:
+          title: Failure Reason
+          type: string
+        coded_pick_sequence:
+          title: Coded Pick Sequence
+          type: string
+        uncoded_pick_sequence:
+          title: Uncoded Pick Sequence
+          type: string
+        coded_place_sequence:
+          title: Coded Place Sequence
+          type: string
+        uncoded_place_sequence:
+          title: Uncoded Place Sequence
+          type: string
+    DataSetNamespace:
+      title: DataSetNamespace
+      enum:
+      - production
+      - reference
+      type: string
+      description: An enumeration.
+    DefaultProductIdHistoryDict:
+      title: DefaultProductIdHistoryDict
+      required:
+      - default_product_id
+      type: object
+      properties:
+        default_product_id:
+          title: Default Product Id
+          type: string
+    DefaultProductIdHistoryDto:
+      title: DefaultProductIdHistoryDto
+      required:
+      - id
+      - application_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        application_time:
+          title: Application Time
+          type: string
+          format: date-time
+        data:
+          "$ref": "#/components/schemas/DefaultProductIdHistoryDict"
+    DeploymentType:
+      title: DeploymentType
+      enum:
+      - RSSH
+      - VPN
+      type: string
+      description: An enumeration.
+    DummyLineResponse:
+      title: DummyLineResponse
+      required:
+      - id
+      - display_name
+      - customer_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+        schedule:
+          "$ref": "#/components/schemas/DummyLineScheduleResponse"
+        schedule_application_time:
+          title: Schedule Application Time
+          type: string
+          format: date-time
+        ref_station_id:
+          title: Ref Station Id
+          type: string
+        default_product_id:
+          title: Default Product Id
+          type: string
+        default_product_id_history:
+          title: Default Product Id History
+          type: array
+          items:
+            "$ref": "#/components/schemas/DefaultProductIdHistoryDto"
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        stations:
+          title: Stations
+          type: array
+          items:
+            "$ref": "#/components/schemas/StationResponse"
+        line_products:
+          title: Line Products
+          type: array
+          items:
+            "$ref": "#/components/schemas/LineProductBaseResponse"
+        operator_station_assignment:
+          title: Operator Station Assignment
+          type: array
+          items:
+            "$ref": "#/components/schemas/OperatorStationAssociation"
+        props:
+          "$ref": "#/components/schemas/LineProps"
+        self_serve_migration_status:
+          "$ref": "#/components/schemas/SelfServeMigrationStatus"
+      description: |-
+        LineResponse class is overwritten here for the time being to show a sample api
+        and merge in master with other code.
+        TODO: TO remove this. Following changes need to be part of the above class only.
+    DummyLineScheduleResponse:
+      title: DummyLineScheduleResponse
+      required:
+      - byday
+      - duration
+      - start_time
+      - timezone
+      - rotations
+      type: object
+      properties:
+        byday:
+          title: Byday
+          type: array
+          items:
+            type: integer
+        duration:
+          title: Duration
+          maximum: 86400
+          exclusiveMinimum: 0
+          type: integer
+        start_time:
+          title: Start Time
+          type: string
+        timezone:
+          title: Timezone
+          type: string
+        rotations:
+          title: Rotations
+          type: array
+          items:
+            "$ref": "#/components/schemas/Rotation"
+        name:
+          title: Name
+          type: string
+      description: Adds common utilities required for schema response classes.
+    EnvironmentType:
+      title: EnvironmentType
+      enum:
+      - PROD
+      - TEST
+      type: string
+      description: An enumeration.
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            "$ref": "#/components/schemas/ValidationError"
+    LineProductBaseResponse:
+      title: LineProductBaseResponse
+      required:
+      - product_id
+      - line_id
+      - customer_id
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: string
+        line_id:
+          title: Line Id
+          type: string
+        line_name:
+          title: Line Name
+          type: string
+        takt_time:
+          title: Takt Time
+          type: number
+        target_cycle_time:
+          title: Target Cycle Time
+          type: number
+        takt_time_history:
+          title: Takt Time History
+          type: array
+          items:
+            "$ref": "#/components/schemas/TaktTimeHistoryDto"
+        target_cycle_time_history:
+          title: Target Cycle Time History
+          type: array
+          items:
+            "$ref": "#/components/schemas/TargetCycleTimeHistoryDto"
+        product:
+          "$ref": "#/components/schemas/ProductResponse"
+        customer_id:
+          title: Customer Id
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        line_props:
+          "$ref": "#/components/schemas/LineProps"
+    LineProps:
+      title: LineProps
+      type: object
+      properties:
+        upper_takt_time_multiplier:
+          title: Upper Takt Time Multiplier
+          type: number
+          description: All the content here
+        lower_takt_time_multiplier:
+          title: Lower Takt Time Multiplier
+          type: number
+        work_time_enabled:
+          title: Work Time Enabled
+          type: boolean
+        moving_line:
+          title: Moving Line
+          type: boolean
+    LineResponse:
+      title: LineResponse
+      required:
+      - id
+      - display_name
+      - customer_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+        schedule:
+          "$ref": "#/components/schemas/LineScheduleResponse"
+        inference_schedule:
+          "$ref": "#/components/schemas/LineSchedule"
+        schedule_application_time:
+          title: Schedule Application Time
+          type: string
+          format: date-time
+        ref_station_id:
+          title: Ref Station Id
+          type: string
+        default_product_id:
+          title: Default Product Id
+          type: string
+        default_product_id_history:
+          title: Default Product Id History
+          type: array
+          items:
+            "$ref": "#/components/schemas/DefaultProductIdHistoryDto"
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        stations:
+          title: Stations
+          type: array
+          items:
+            "$ref": "#/components/schemas/StationResponse"
+        line_products:
+          title: Line Products
+          type: array
+          items:
+            "$ref": "#/components/schemas/LineProductBaseResponse"
+        operator_station_assignment:
+          title: Operator Station Assignment
+          type: array
+          items:
+            "$ref": "#/components/schemas/OperatorStationAssociation"
+        props:
+          "$ref": "#/components/schemas/LineProps"
+        self_serve_migration_status:
+          "$ref": "#/components/schemas/SelfServeMigrationStatus"
+      description: Adds common utilities required for schema response classes.
+    LineSchedule:
+      title: LineSchedule
+      required:
+      - byday
+      - duration
+      - start_time
+      - timezone
+      - rotations
+      type: object
+      properties:
+        byday:
+          title: Byday
+          type: array
+          items:
+            type: integer
+        duration:
+          title: Duration
+          maximum: 86400
+          exclusiveMinimum: 0
+          type: integer
+        start_time:
+          title: Start Time
+          type: string
+        timezone:
+          title: Timezone
+          type: string
+        rotations:
+          title: Rotations
+          type: array
+          items:
+            "$ref": "#/components/schemas/Rotation"
+      description: Adds common utilities required for schema response classes.
+    LineScheduleResponse:
+      title: LineScheduleResponse
+      required:
+      - byday
+      - duration
+      - start_time
+      - timezone
+      - rotations
+      type: object
+      properties:
+        byday:
+          title: Byday
+          type: array
+          items:
+            type: integer
+        duration:
+          title: Duration
+          maximum: 86400
+          exclusiveMinimum: 0
+          type: integer
+        start_time:
+          title: Start Time
+          type: string
+        timezone:
+          title: Timezone
+          type: string
+        rotations:
+          title: Rotations
+          type: array
+          items:
+            "$ref": "#/components/schemas/Rotation"
+        name:
+          title: Name
+          type: string
+      description: Adds common utilities required for schema response classes.
+    ObservationResponse:
+      title: ObservationResponse
+      required:
+      - start_date_time
+      - end_date_time
+      - stream_name
+      - duration
+      - source
+      - tag_names
+      type: object
+      properties:
+        _id:
+          title: " Id"
+          type: string
+          format: uuid
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        updated_at:
+          title: Updated At
+          type: string
+          format: date-time
+        created_by:
+          title: Created By
+          type: string
+        start_date_time:
+          title: Start Date Time
+          type: string
+          format: date-time
+        end_date_time:
+          title: End Date Time
+          type: string
+          format: date-time
+        stream_name:
+          title: Stream Name
+          type: string
+        duration:
+          title: Duration
+          type: number
+        line_id:
+          title: Line Id
+          type: string
+        line_name:
+          title: Line Name
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        station_name:
+          title: Station Name
+          type: string
+        shift_idx:
+          title: Shift Idx
+          type: string
+        rotation_idx:
+          title: Rotation Idx
+          type: string
+        assembly_date:
+          title: Assembly Date
+          type: string
+        thumbnail_fname:
+          title: Thumbnail Fname
+          type: string
+        thumbnail_url:
+          title: Thumbnail Url
+          type: string
+        product_name:
+          title: Product Name
+          type: string
+        tag_names:
+          title: Tag Names
+          type: array
+          items:
+            type: string
+        description:
+          title: Description
+          type: string
+        annotation_source_ids:
+          title: Annotation Source Ids
+          type: array
+          items:
+            type: string
+      description: Adds common utilities required for schema response classes.
+    ObservationsResponse:
+      title: ObservationsResponse
+      required:
+      - metadata
+      - results
+      type: object
+      properties:
+        metadata:
+          "$ref": "#/components/schemas/PaginationMeta"
+        results:
+          title: Results
+          type: array
+          items:
+            "$ref": "#/components/schemas/ObservationResponse"
+      description: Adds common utilities required for schema response classes.
+    OperatorStationAssociation:
+      title: OperatorStationAssociation
+      required:
+      - operator
+      - stations
+      type: object
+      properties:
+        operator:
+          title: Operator
+          type: integer
+        stations:
+          title: Stations
+          type: array
+          items:
+            "$ref": "#/components/schemas/OperatorStationMeta"
+    OperatorStationMeta:
+      title: OperatorStationMeta
+      required:
+      - station_id
+      - walk_time
+      - percentage_work
+      type: object
+      properties:
+        station_id:
+          title: Station Id
+          type: string
+        walk_time:
+          title: Walk Time
+          minimum: 0
+          type: number
+        percentage_work:
+          title: Percentage Work
+          maximum: 100
+          minimum: 0
+          type: integer
+    PaginationMeta:
+      title: PaginationMeta
+      required:
+      - count
+      - limit
+      - skip
+      type: object
+      properties:
+        count:
+          title: Count
+          type: integer
+        limit:
+          title: Limit
+          type: integer
+        skip:
+          title: Skip
+          type: integer
+    ProductResponse:
+      title: ProductResponse
+      required:
+      - id
+      - display_name
+      - customer_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        name:
+          title: Name
+          type: string
+        description:
+          title: Description
+          type: string
+        family:
+          title: Family
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+    Rotation:
+      title: Rotation
+      required:
+      - idx
+      - byday
+      - duration
+      - shift_idx
+      - day_offset
+      - start_time
+      type: object
+      properties:
+        idx:
+          title: Idx
+          type: integer
+        byday:
+          title: Byday
+          type: array
+          items:
+            type: integer
+        duration:
+          title: Duration
+          type: integer
+        shift_idx:
+          title: Shift Idx
+          type: integer
+        day_offset:
+          title: Day Offset
+          type: integer
+        start_time:
+          title: Start Time
+          type: string
+    SelfServeMigrationStatus:
+      title: SelfServeMigrationStatus
+      enum:
+      - 0
+      - 40
+      - 50
+      type: integer
+      description: |-
+        This represents the current Self Serve Migration Status of the line
+        NOT_DONE => Data on the line is not migrated to StationDataConfig
+        TESTING => Data on the line is not migrated to StationDataConfig
+        DONE => Data on the line is not migrated to StationDataConfig
+    SortOrders:
+      title: SortOrders
+      enum:
+      - '1'
+      - "-1"
+      type: string
+      description: |-
+        Ascending: 1
+        Descending: -1
+    Source:
+      title: Source
+      required:
+      - source_id
+      - source_type
+      type: object
+      properties:
+        source_id:
+          title: Source Id
+          type: string
+        source_type:
+          "$ref": "#/components/schemas/SourceType"
+        reliability:
+          title: Reliability
+          type: number
+          default: 0.5
+    SourceType:
+      title: SourceType
+      enum:
+      - gt
+      - model
+      - customer
+      - mes
+      - drishti
+      type: string
+      description: An enumeration.
+    StationProductBaseResponse:
+      title: StationProductBaseResponse
+      required:
+      - product_id
+      - station_id
+      - customer_id
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        action_list:
+          title: Action List
+          type: array
+          items:
+            "$ref": "#/components/schemas/Action"
+        target_cycle_time:
+          title: Target Cycle Time
+          type: number
+        action_list_history:
+          title: Action List History
+          type: array
+          items:
+            "$ref": "#/components/schemas/ActionListHistoryDto"
+        product:
+          "$ref": "#/components/schemas/ProductResponse"
+        customer_id:
+          title: Customer Id
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+    StationResponse:
+      title: StationResponse
+      required:
+      - id
+      - display_name
+      - customer_id
+      - line_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        line_id:
+          title: Line Id
+          type: string
+        name:
+          title: Name
+          type: string
+        position_in_line:
+          title: Position In Line
+          type: integer
+        tier:
+          "$ref": "#/components/schemas/Tier"
+        tier_history:
+          title: Tier History
+          type: array
+          items:
+            "$ref": "#/components/schemas/TierHistoryDto"
+        description:
+          title: Description
+          type: string
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        station_streams:
+          title: Station Streams
+          type: array
+          items:
+            "$ref": "#/components/schemas/StationStreamResponsewStream"
+        station_products:
+          title: Station Products
+          type: array
+          items:
+            "$ref": "#/components/schemas/StationProductBaseResponse"
+    StationStreamResponsewStream:
+      title: StationStreamResponsewStream
+      required:
+      - stream_id
+      - station_id
+      - customer_id
+      type: object
+      properties:
+        stream_id:
+          title: Stream Id
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        is_primary:
+          title: Is Primary
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        stream:
+          "$ref": "#/components/schemas/StreamResponse"
+    StationStreamResponsewoStream:
+      title: StationStreamResponsewoStream
+      required:
+      - stream_id
+      - station_id
+      - customer_id
+      type: object
+      properties:
+        stream_id:
+          title: Stream Id
+          type: string
+        station_id:
+          title: Station Id
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        is_primary:
+          title: Is Primary
+          type: boolean
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        station:
+          "$ref": "#/components/schemas/StationResponse"
+        line:
+          "$ref": "#/components/schemas/LineResponse"
+    Status:
+      title: Status
+      enum:
+      - 0
+      - 1
+      - 20
+      - 40
+      type: integer
+      description: An enumeration.
+    StreamResponse:
+      title: StreamResponse
+      required:
+      - id
+      - display_name
+      - customer_id
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        display_name:
+          title: Display Name
+          type: string
+        customer_id:
+          title: Customer Id
+          type: string
+        description:
+          title: Description
+          type: string
+        state:
+          "$ref": "#/components/schemas/StreamState"
+        rssh_rtsp_port:
+          title: Rssh Rtsp Port
+          type: integer
+        view:
+          "$ref": "#/components/schemas/StreamViewType"
+        schedule:
+          "$ref": "#/components/schemas/LineScheduleResponse"
+        created_at:
+          title: Created At
+          type: string
+          format: date-time
+        modified_at:
+          title: Modified At
+          type: string
+          format: date-time
+        customer_infra:
+          "$ref": "#/components/schemas/CustomerInfraDto"
+        camera:
+          "$ref": "#/components/schemas/CameraBaseResponse"
+        camera_id:
+          title: Camera Id
+          type: string
+        station_streams:
+          title: Station Streams
+          type: array
+          items:
+            "$ref": "#/components/schemas/StationStreamResponsewoStream"
+    StreamState:
+      title: StreamState
+      enum:
+      - -1
+      - 0
+      - 1
+      type: integer
+      description: An enumeration.
+    StreamViewType:
+      title: StreamViewType
+      enum:
+      - station
+      - overhead
+      type: string
+      description: An enumeration.
+    TaktTimeHistoryDict:
+      title: TaktTimeHistoryDict
+      required:
+      - takt_time
+      type: object
+      properties:
+        takt_time:
+          title: Takt Time
+          type: number
+    TaktTimeHistoryDto:
+      title: TaktTimeHistoryDto
+      required:
+      - id
+      - application_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        application_time:
+          title: Application Time
+          type: string
+          format: date-time
+        data:
+          "$ref": "#/components/schemas/TaktTimeHistoryDict"
+    TargetCycleTimeHistoryDict:
+      title: TargetCycleTimeHistoryDict
+      required:
+      - target_cycle_time
+      type: object
+      properties:
+        target_cycle_time:
+          title: Target Cycle Time
+          type: number
+    TargetCycleTimeHistoryDto:
+      title: TargetCycleTimeHistoryDto
+      required:
+      - id
+      - application_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        application_time:
+          title: Application Time
+          type: string
+          format: date-time
+        data:
+          "$ref": "#/components/schemas/TargetCycleTimeHistoryDict"
+    Tier:
+      title: Tier
+      enum:
+      - Trace
+      - Trace++
+      - Flow
+      - Assist
+      - Inactive
+      - Live Video Scheduled
+      - Actions Scheduled
+      type: string
+      description: An enumeration.
+    TierHistoryDict:
+      title: TierHistoryDict
+      required:
+      - tier
+      type: object
+      properties:
+        tier:
+          title: Tier
+          type: string
+    TierHistoryDto:
+      title: TierHistoryDto
+      required:
+      - id
+      - application_time
+      type: object
+      properties:
+        id:
+          title: Id
+          type: string
+        application_time:
+          title: Application Time
+          type: string
+          format: date-time
+        data:
+          "$ref": "#/components/schemas/TierHistoryDict"
+    Validation:
+      title: Validation
+      required:
+      - name
+      - status
+      - checks
+      type: object
+      properties:
+        config_id:
+          title: Config Id
+          type: string
+          format: uuid
+        name:
+          title: Name
+          type: string
+        status:
+          "$ref": "#/components/schemas/Status"
+        checks:
+          title: Checks
+          type: array
+          items:
+            "$ref": "#/components/schemas/Check"
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    drishti__data__api__routes__actions__SortBy:
+      title: SortBy
+      enum:
+      - duration
+      - start_date_time
+      - distance_from_median
+      type: string
+      description: An enumeration.
+    drishti__data__api__routes__cycles__SortBy:
+      title: SortBy
+      enum:
+      - duration
+      - unit_in_view_time
+      - unit_out_of_view_time
+      - total_time
+      - work_time
+      - idle_time
+      - unit_in_to_unit_in_time
+      - start_date_time
+      - distance_from_median
+      type: string
+      description: An enumeration.
+    drishti__data__api__routes__observations__SortBy:
+      title: SortBy
+      enum:
+      - duration
+      - start_date_time
+      type: string
+      description: An enumeration.
