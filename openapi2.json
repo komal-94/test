@@ -1282,7 +1282,6 @@
     "/config/v1/customers/{customer_id}/streams/{stream_id}": {
       "get": {
         "tags": [
-          "__external__",
           "streams"
         ],
         "summary": "Get Stream",
@@ -1335,7 +1334,6 @@
     "/config/v1/customers/{customer_id}/streams": {
       "get": {
         "tags": [
-          "__external__",
           "streams"
         ],
         "summary": "Get Streams",
