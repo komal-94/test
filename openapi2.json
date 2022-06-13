@@ -8,8 +8,7 @@
     "/api/v2/customers/{customer_id}/actions": {
       "get": {
         "tags": [
-          "actions",
-          "__external__"
+          "actions"
         ],
         "summary": "Search Actions",
         "operationId": "search_actions_api_v2_customers__customer_id__actions_get",
@@ -315,8 +314,7 @@
     "/api/v2/customers/{customer_id}/actions/{action_id}": {
       "get": {
         "tags": [
-          "actions",
-          "__external__"
+          "actions"
         ],
         "summary": "Get Action",
         "operationId": "get_action_api_v2_customers__customer_id__actions__action_id__get",
@@ -368,8 +366,7 @@
     "/api/v2/customers/{customer_id}/cycles": {
       "get": {
         "tags": [
-          "cycles",
-          "__external__"
+          "cycles"
         ],
         "summary": "Search Cycles",
         "operationId": "search_cycles_api_v2_customers__customer_id__cycles_get",
@@ -866,8 +863,7 @@
     "/api/v2/customers/{customer_id}/cycles/{cycle_id}": {
       "get": {
         "tags": [
-          "cycles",
-          "__external__"
+          "cycles"
         ],
         "summary": "Get Cycle",
         "operationId": "get_cycle_api_v2_customers__customer_id__cycles__cycle_id__get",
@@ -919,8 +915,7 @@
     "/api/v2/customers/{customer_id}/observations/{observation_id}": {
       "get": {
         "tags": [
-          "observations",
-          "__external__"
+          "observations"
         ],
         "summary": "Get Observation",
         "operationId": "get_observation_api_v2_customers__customer_id__observations__observation_id__get",
@@ -972,8 +967,7 @@
     "/api/v2/customers/{customer_id}/observations": {
       "get": {
         "tags": [
-          "observations",
-          "__external__"
+          "observations"
         ],
         "summary": "Search Observations",
         "operationId": "search_observations_api_v2_customers__customer_id__observations_get",
@@ -1402,59 +1396,6 @@
                   "items": {
                     "$ref": "#/components/schemas/StreamResponse"
                   }
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/config/v1/customers/{customer_id}/lines/sample/{line_id}": {
-      "get": {
-        "tags": [
-          "__external__",
-          "line"
-        ],
-        "summary": "Get Sample Line",
-        "description": "Copy of get_line function. Written separately to show working example of an updated\nresponse class separately.\nTODO: to remove this.",
-        "operationId": "get_sample_line_config_v1_customers__customer_id__lines_sample__line_id__get",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "title": "Customer Id",
-              "type": "string"
-            },
-            "name": "customer_id",
-            "in": "path"
-          },
-          {
-            "required": true,
-            "schema": {
-              "title": "Line Id",
-              "type": "string"
-            },
-            "name": "line_id",
-            "in": "path"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DummyLineResponse"
                 }
               }
             }
